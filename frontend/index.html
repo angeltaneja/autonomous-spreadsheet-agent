@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Spreadsheet Agent</title>
+    <!-- Outfit Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-glow-1"></div>
+    <div class="background-glow-2"></div>
+    
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-wand-magic-sparkles magic-icon"></i>
+                <h1>Autonomous Spreadsheet Agent</h1>
+            </div>
+            <p class="subtitle">Autonomous AI Agent for Local Excel and Google Sheets Workflows</p>
+        </header>
+
+        <!-- Command Panel -->
+        <section class="card control-card glass">
+            <h2><i class="fa-solid fa-terminal card-icon"></i> Agent Command Center</h2>
+            <p class="card-instruction">Enter your instruction for the agent. The agent will formulate a plan, generate the data, and automate your spreadsheets.</p>
+            <div class="input-group">
+                <input type="text" id="prompt-input" value="Create an employee CSV and import it into Excel and Google Sheets." placeholder="Type your command here...">
+                <button id="run-btn"><i class="fa-solid fa-play"></i> Run Agent</button>
+            </div>
+            <div class="status-indicator-bar" id="agent-status-bar">
+                <span class="status-label">Agent State:</span>
+                <span class="status-badge idle" id="agent-status">IDLE</span>
+            </div>
+        </section>
+
+        <!-- Execution Stepper -->
+        <section class="card glass stepper-card">
+            <h2><i class="fa-solid fa-list-check card-icon"></i> Execution Progress</h2>
+            <div class="stepper">
+                <div class="step" id="step-csv">
+                    <div class="step-icon-wrapper">
+                        <i class="fa-solid fa-circle-notch spinner-icon"></i>
+                        <i class="fa-solid fa-check check-icon"></i>
+                        <i class="fa-solid fa-xmark error-icon"></i>
+                        <i class="fa-solid fa-file-csv default-icon"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3>1. Generate CSV Data</h3>
+                        <p class="step-desc" id="desc-csv">Pending agent initialization.</p>
+                    </div>
+                </div>
+                <div class="step" id="step-excel">
+                    <div class="step-icon-wrapper">
+                        <i class="fa-solid fa-circle-notch spinner-icon"></i>
+                        <i class="fa-solid fa-check check-icon"></i>
+                        <i class="fa-solid fa-xmark error-icon"></i>
+                        <i class="fa-solid fa-file-excel default-icon"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3>2. Automate local Excel</h3>
+                        <p class="step-desc" id="desc-excel">Pending agent initialization.</p>
+                    </div>
+                </div>
+                <div class="step" id="step-sheets">
+                    <div class="step-icon-wrapper">
+                        <i class="fa-solid fa-circle-notch spinner-icon"></i>
+                        <i class="fa-solid fa-check check-icon"></i>
+                        <i class="fa-solid fa-xmark error-icon"></i>
+                        <i class="fa-brands fa-google-drive default-icon"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3>3. Upload to Google Sheets</h3>
+                        <p class="step-desc" id="desc-sheets">Pending agent initialization.</p>
+                    </div>
+                </div>
+                <div class="step" id="step-verify">
+                    <div class="step-icon-wrapper">
+                        <i class="fa-solid fa-circle-notch spinner-icon"></i>
+                        <i class="fa-solid fa-check check-icon"></i>
+                        <i class="fa-solid fa-xmark error-icon"></i>
+                        <i class="fa-solid fa-shield-check default-icon"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3>4. Verify Import</h3>
+                        <p class="step-desc" id="desc-verify">Pending agent initialization.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Access Buttons -->
+        <section class="card glass actions-card" id="actions-panel">
+            <h2><i class="fa-solid fa-arrow-up-right-from-square card-icon"></i> Spreadsheet Quick Access</h2>
+            <p>Access the spreadsheets generated and formatted by the agent.</p>
+            <div class="btn-group">
+                <button id="open-excel-btn" class="action-btn excel-btn" disabled>
+                    <i class="fa-solid fa-file-excel"></i> Open Excel Locally
+                </button>
+                <a id="open-sheets-link" href="#" target="_blank" class="action-btn sheets-btn disabled">
+                    <i class="fa-brands fa-google-drive"></i> Open Google Sheet
+                </a>
+            </div>
+        </section>
+
+        <!-- Two column layout: Preview & Console Logs -->
+        <div class="dashboard-grid">
+            <!-- Data Preview -->
+            <section class="card glass data-card">
+                <h2><i class="fa-solid fa-table-list card-icon"></i> Employee Data Preview</h2>
+                <div class="table-container">
+                    <table id="data-preview-table">
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Email</th>
+                                <th>Salary</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-preview-body">
+                            <tr>
+                                <td colspan="5" class="empty-state">No data generated yet. Click "Run Agent" to start.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Agent Logs -->
+            <section class="card glass log-card">
+                <h2><i class="fa-solid fa-terminal card-icon"></i> Agent Reasoning & Logs</h2>
+                <div class="console-wrapper">
+                    <div id="console-logs" class="console">
+                        <div class="log-line system-line">[System] Agent dashboard initialized. Ready for commands.</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
