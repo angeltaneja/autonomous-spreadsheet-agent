@@ -95,3 +95,10 @@ Then navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
    - Excel will open in the background, style and save your workbook, and close.
    - The Google Sheet link and "Open Excel Locally" buttons will activate once completed.
    - The preview table will display the generated employee rows.
+
+---
+
+## Dashboard Preview
+Here is the premium glassmorphic dashboard showcasing a successful agent execution:
+
+![Autonomous Spreadsheet Agent Dashboard Success](screenshot.png)
